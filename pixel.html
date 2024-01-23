@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Pixel Drawing</title>
+    <style>
+      body {
+        margin: 200px auto;
+        --w: 10;
+        --h: 10;
+      }
+      #canvas {
+        width: calc(var(--w) * 10px); /* 캔버스 크기 조정 */
+        height: calc(var(--h) * 10px);
+        border: 1px solid black;
+        display: grid;
+        grid-template-columns: repeat(var(--w), 1fr); /* 10x10 그리드 */
+        grid-template-rows: repeat(var(--h), 1fr);
+      }
+      .pixel {
+        width: 10px;
+        height: 10px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="canvas"></div>
+    <button onclick="h()">hi</button>
+    <button onclick="c()">clear</button>
+    <script>
+      let B = "black",
+        W = "white",
+        S = "style",
+        g = "background";
+      let b = document.body;
+      document.addEventListener("DOMContentLoaded", function () {
+        const canvas = document.getElementById("canvas");
+        for (let i = 0; i < 100; i++) {
+          // 100개의 픽셀 생성
+          let pixel = document.createElement("div");
+          pixel.classList.add("pixel");
+          canvas.appendChild(pixel);
+          pixel.oncontextmenu = pixel.onclick = function (e) {
+            console.log(e);
+            this.style.background = e.buttons === 2 ? W : B;
+          };
+          pixel.onmousemove = function (e) {
+            b = e.buttons;
+            b == 1 ? (this[s][g] = B) : b == 2 ? (this[s][g] = W) : 0;
+          };
+        }
+      });
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+      h = () => {
+        console.log("first");
+        b.style.setProperty("--w", 20);
+        b.style.setProperty("--h", 20);
+      };
+      c = () => {
+        console.log("clear");
+        document
+          .querySelectorAll(".pixel")
+          .forEach((e) => (e.style.background = W));
+      };
+    </script>
+  </body>
+</html>
