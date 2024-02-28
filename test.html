@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<head>
+  <title>work in progress ~ js1024</title>
+  <meta name="author" content="author" />
+  <meta name="description" content="description" />
+  <meta name="title" content="title" />
+  <meta charset="utf-8" />
+</head>
+
+<body id="b">
+  <canvas id="a"></canvas>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #a {
+      position: relative;
+      display: block;
+    }
+
+    .play {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      font-size: 30px;
+      font-family: arial, sans-serif;
+      background: #f3f4f5;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+    }
+
+    /* for mobile */
+    :root {
+      touch-action: pan-x pan-y;
+      height: 100%;
+    }
+  </style>
+
+  <script>
+    var title = "title";
+
+    a = document.getElementById("a");
+    a.width = innerWidth;
+    a.height = innerHeight;
+
+    b = document.getElementById("b");
+
+    c = a.getContext("2d");
+    d = document;
+  </script>
+
+  <script id="entry" src="./test.js"></script>
+</body>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Pixel Drawing</title>
+    <style>
+      #s {
+        width: calc(var(--w) * 20px); /* 캔버스 크기 조정 */
+        height: calc(var(--h) * 20px);
+        border: 1px solid black;
+        display: grid;
+        grid-template-columns: repeat(var(--w), 1fr); /* 10x10 그리드 */
+        grid-template-rows: repeat(var(--h), 1fr);
+      }
+      .p {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body id="b" style="--w: 10; --h: 10">
+    <div id="s"></div>
+    <button onclick="h(20,20)">hi</button>
+    <button onclick="l()">clear</button>
+    <script>
+      let B = "black",
+        W = "",
+        S = "style",
+        G = "background",
+        T = "buttons";
+      let d = document,
+        i;
+
+      // draw canvas
+      r = (i) => {
+        s.innerHTML = "";
+        for (; i--; ) {
+          let p = d.createElement("div");
+          p.className = "p";
+          p.oncontextmenu = p.onclick = function (e) {
+            e.preventDefault();
+            this[S][G] = e[T] ? W : B;
+          };
+          p.onmousemove = function (e) {
+            e[T] && (this[S][G] = e[T] - 1 ? W : B);
+          };
+          s.append(p);
+        }
+      };
+      // set canvas size function
+      h = (w, h) => {
+        b[S].cssText = `--w:${w};--h:${h};`;
+        r(w * h);
+      };
+      // clear function
+      l = () => {
+        [...s.children].forEach((x) => (x[S][G] = W));
+      };
+
+      r(100);
+    </script>
+  </body>
+</html>

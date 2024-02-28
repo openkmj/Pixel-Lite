@@ -4,17 +4,21 @@
     <title>Simple Pixel Drawing</title>
     <style>
       body {
-        margin: 200px auto;
-        --w: 10;
-        --h: 10;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        --width: 10; /* Pixel Canvas Width */
+        --height: 10; /* Pixel Canvas Height */
       }
       #canvas {
-        width: calc(var(--w) * 10px); /* 캔버스 크기 조정 */
-        height: calc(var(--h) * 10px);
+        width: calc(var(--width) * 10px);
+        height: calc(var(--height) * 10px);
         border: 1px solid black;
         display: grid;
-        grid-template-columns: repeat(var(--w), 1fr); /* 10x10 그리드 */
-        grid-template-rows: repeat(var(--h), 1fr);
+        grid-template-columns: repeat(var(--width), 1fr);
+        grid-template-rows: repeat(var(--height), 1fr);
       }
       .pixel {
         width: 10px;
@@ -26,7 +30,7 @@
   </head>
   <body>
     <div id="canvas"></div>
-    <button onclick="h()">hi</button>
+    <button onclick="h()" id="x">hi</button>
     <button onclick="c()">clear</button>
     <script>
       let B = "black",
@@ -35,12 +39,12 @@
         g = "background";
       let b = document.body;
       document.addEventListener("DOMContentLoaded", function () {
-        const canvas = document.getElementById("canvas");
+        const cc = document.getElementById("canvas");
         for (let i = 0; i < 100; i++) {
           // 100개의 픽셀 생성
           let pixel = document.createElement("div");
           pixel.classList.add("pixel");
-          canvas.appendChild(pixel);
+          cc.appendChild(pixel);
           pixel.oncontextmenu = pixel.onclick = function (e) {
             console.log(e);
             this.style.background = e.buttons === 2 ? W : B;
@@ -54,8 +58,8 @@
       document.addEventListener("contextmenu", (e) => e.preventDefault());
       h = () => {
         console.log("first");
-        b.style.setProperty("--w", 20);
-        b.style.setProperty("--h", 20);
+        b.style.setProperty("--width", 20);
+        b.style.setProperty("--height", 20);
       };
       c = () => {
         console.log("clear");
